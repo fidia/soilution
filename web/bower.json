@@ -1,0 +1,30 @@
+{
+  "name": "visualizing_streaming_data",
+  "description": "Making a single page web application which will be showing real time data with visual elements.",
+  "main": "index.js",
+  "authors": [
+    "Himanshu Chowdhary"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "streaming",
+    "visualization",
+    "kafka",
+    "websockets",
+    "stream",
+    "processing"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.1",
+    "materialize": "^0.97.7",
+    "d3": "v3.5.17"
+  }
+}

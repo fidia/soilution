@@ -1,0 +1,65 @@
+{
+    "mqtt": {
+        "username": "digitalent2019",
+        "password": "12345678",
+        "host": "10.0.1.83",
+        "port": 1883,
+        "topic": "sensors"
+    },
+    "misc": {
+        "interval_ms": 1000,
+        "verbose": true
+    },
+    "sensors": {
+        "Sensor 1": {
+            "lat": 10,
+            "lng": 10,
+            "type1": "suhu",
+            "range1": [18, 35],
+            "type2": "kelembapan",
+            "range2": [28, 92],
+            "type3": "pH",
+            "range3": [4, 8]
+        },
+        "Sensor 2": {
+            "lat": 90,
+            "lng": 90,
+            "type1": "suhu",
+            "range1": [18, 35],
+            "type2": "kelembapan",
+            "range2": [28, 92],
+            "type3": "pH",
+            "range3": [4, 8]
+        },
+        "Sensor 3": {
+            "lat": 90,
+            "lng": 10,
+            "type1": "suhu",
+            "range1": [18, 35],
+            "type2": "kelembapan",
+            "range2": [28, 92],
+            "type3": "pH",
+            "range3": [4, 8]
+        },
+        "Sensor 4": {
+            "lat": 10,
+            "lng": 90,
+            "type1": "suhu",
+            "range1": [18, 35],
+            "type2": "kelembapan",
+            "range2": [28, 92],
+            "type3": "pH",
+            "range3": [4, 8]
+        },
+        "Sensor 5": {
+            "lat": 50,
+            "lng": 50,
+            "type1": "suhu",
+            "range1": [18, 35],
+            "type2": "kelembapan",
+            "range2": [28, 92],
+            "type3": "pH",
+            "range3": [4, 8]
+        }
+    }
+}

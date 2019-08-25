@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Clickstream Analytics Dashboard</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="bower_components/materialize/bin/materialize.css">
+    <link rel="stylesheet" type="text/css" href="/css/epoch.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/nv.d3.css">
+
+</head>
+<body>
+  <input type="button" class="btn-primary btn-sm" onclick="PrintPreview();" value="Print Preview" />
+
+  <asp:Label ID="lbl1" runat="server" Text="Contents"></asp:Label>
+<asp:Label Text="Contractor Name" ID="lblCont" runat="server"></asp:Label>
+<div id="forPrintPreview">
+  <asp:Label Text="Company Name" runat="server"></asp:Label>
+  <asp:GridView runat="server">
+
+  <div id="kpi"></div>
+  <div id="maps"></div>
+  <div id="graphs">
+    <div class="row">
+      <div class="col m6">
+        <div class="card small">
+          <div class="card-content">
+            <span class="card-title">Rata-Rata Suhu</span>
+            <div id="avgSuhu" style="height: 220px;" ></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col m6">
+        <div class="card small">
+          <div class="card-content">
+            <span class="card-title">Rata-rata Kelembapan</span>
+            <div id="avgKelembapan" style="height: 220px;" ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col m6">
+        <div class="card medium">
+          <div class="card-content">
+            <span class="card-title">Rata-rata pH</span>
+            <div id="avgPH" style="height: 320px;" ></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col m6">
+        <div class="card medium">
+          <div class="card-content">
+            <span class="card-title">Kategori</span>
+            <div  style="height: 320px;" >
+				<p id="katagori">Hello World!</p>
+			</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  </asp:GridView>
+
+  <script src="bower_components/jquery/dist/jquery.min.js" ></script>
+  <script src="bower_components/materialize/bin/materialize.js"></script>
+  <script src="bower_components/d3/d3.min.js"></script>
+  <script src="/javascripts/nv.d3.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/javascripts/main.js"></script>
+  <script src="/javascripts/jquery-3.3.1.min.js"></script>
+</body>
+<script>
+        Chart.defaults.global.defaultFontColor = 'white';
+        let ctxLine,
+            ctxBar,
+            ctxPie,
+            optionsLine,
+            optionsBar,
+            optionsPie,
+            configLine,
+            configBar,
+            configPie,
+            lineChart;
+        barChart, pieChart;
+        // DOM is ready
+        $(function () {
+            drawLineChart(); // Line Chart
+            drawBarChart(); // Bar Chart
+            drawPieChart(); // Pie Chart
+
+            $(window).resize(function () {
+                updateLineChart();
+                updateBarChart();                
+            });
+        });
+
+        function PrintPreview() {
+         var Contractor= $('span[id*="lblCont"]').html();
+         printWindow = window.open("", "", "location=1,status=1,scrollbars=1,width=650,height=600");
+         printWindow.document.write('<html><head>');
+         printWindow.document.write('<style type="text/css">@media print{.no-print, .no-print *{display: none !important;}</style>');
+         printWindow.document.write('</head><body>');
+         printWindow.document.write('<div style="width:100%;text-align:right">');
+
+          //Print and cancel button
+         printWindow.document.write('<input type="button" id="btnPrint" value="Print" class="no-print" style="width:100px" onclick="window.print()" />');
+         printWindow.document.write('<input type="button" id="btnCancel" value="Cancel" class="no-print"  style="width:100px" onclick="window.close()" />');
+
+         printWindow.document.write('</div>');
+         var temp="";
+         //You can include any data this way.
+         printWindow.document.write('<table><tr><td>Contractor name:'+ temp +'</td></tr>you can include any info here</table');
+
+         printWindow.document.write(document.getElementById('forPrintPreview').innerHTML);
+         //here 'forPrintPreview' is the id of the 'div' in current page(aspx).
+         printWindow.document.write('</body></html>');
+         printWindow.document.close();
+         printWindow.focus();
+        }
+</script>
+</html>

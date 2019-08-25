@@ -1,0 +1,28 @@
+var express = require('express');
+var app = express();
+var server = require('http').Server(app);
+var io = require('socket.io')(server); // socket.io to the server
+var kafka = require('kafka-node');
+
+
+server.listen(3000);
+
+app.use(express.static(__dirname + '/public'));
+app.use('/bower_components',  express.static(__dirname + '/bower_components'));
+
+app.get('/', function (req, res) {
+  res.sendFile(__dirname + '/index.html');
+});
+
+// Kafka Consumer Config
+var zkserver = '192.168.56.115:2181'; // Kafka Server Address
+var kafkaClient = new kafka.Client(zkserver);
+var consumer = new kafka.Consumer(kafkaClient,[{ topic: 'avgdata'}, { topic: 'maxvalue' },{ topic: 'minvalue' }],{autoCommit: true});
+
+// Kafka consumer action
+consumer.on('message', function (message) {
+  setInterval(() => {
+     //console.log(message.topic + " ->> " + message.value);
+      io.emit(1, message.topic, message.value)}
+  , 60 * 1000); // Baca Kafka topic value and Kafka message
+});
